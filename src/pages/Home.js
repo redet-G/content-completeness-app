@@ -163,7 +163,7 @@ const Home = (props) => {
         </div>
         <div className={classes.container}>
           <DataElementGroupSelect
-            label=" Select data element"
+            label=" Select data element group"
             selected={selectedDataElementGroup}
             dataElementGroups={props?.dataElementGroups}
             onChange={handelDataElementGroupChagne}

@@ -21,7 +21,7 @@ const DataElementRow = ({
         return total;
   },0)
 
-  const completeness = actualValues/expectedValues;
+  const completeness = (actualValues/expectedValues)*100;
   return (
     <>
       {false ? (
@@ -38,7 +38,7 @@ const DataElementRow = ({
             {(expectedValues)}
           </DataTableCell>
           <DataTableCell key={dataElement?.id + "4"}>
-            {completeness.toFixed(2)}
+            {completeness.toFixed(1)}%
           </DataTableCell>
         </DataTableRow>
       )}
