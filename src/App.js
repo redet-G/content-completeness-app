@@ -24,11 +24,8 @@ const dataElementGroups = {};
 
 const MyApp = () => {
   const { Loading, error, data } = useDataQuery(meQuery);
-  console.log(data);
   if (error) return <span>Error: {error.message}</span>;
-
   if (Loading) return <span>Loading...</span>;
-
   return (
     <Home
       me={data?.me}

@@ -21,8 +21,6 @@ export default function useDataElements({dataElementGroup}){
 
         const {loading, error, data } = useDataQuery(query);
 
-        console.log(data);
-
         return data;
     },[dataElementGroup]);
 }

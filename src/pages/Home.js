@@ -1,27 +1,14 @@
-import { DataQuery } from "@dhis2/app-runtime";
-import i18n from "@dhis2/d2-i18n";
 import React from "react";
 import classes from "../App.module.css";
-import { AlertBar, DataTable, OrganisationUnitTree } from "@dhis2/ui";
+import { OrganisationUnitTree } from "@dhis2/ui";
 import { useState, useEffect } from "react";
 import DataElementGroupSelect from "../components/DataElementGroupSelect.js";
 import PeroidSelect from "../components/PeriodSelect.js";
-import { generateFixedPeriods } from "@dhis2/multi-calendar-dates";
 import getCurrentDate from "../memo/getCurrentDate.js";
 import usePeriods from "../memo/usePeriod.js";
-import useDataElements from "../memo/useDataElements.js";
 
 import { useDataQuery, useDataEngine } from "@dhis2/app-runtime";
 import DataElementTable from "../components/DataElementTable";
-import {
-  TableHead,
-  DataTableRow,
-  DataTableColumnHeader,
-  TableBody,
-  DataTableCell,
-  TableFoot,
-  spacers,
-} from "@dhis2/ui";
 
 const selectedDataElmentGroupQuery = {
   dataElements: {
@@ -117,7 +104,6 @@ const Home = (props) => {
         })
         .then((result) => {
           setValidOrgUnitCount(result?.orgUnits?.pager?.total);
-          console.log(result?.orgUnits?.pager?.total, "dataset");
         });
   }, [dataSetId, selectedOrgUnit?.id]);
 
@@ -132,7 +118,6 @@ const Home = (props) => {
           }),
         })
         .then((data) => {
-          console.log(data?.dataValues?.dataValues, "inner");
           setDataValues(data?.dataValues?.dataValues)
         });
   }, [dataSetId,selectedPeriod?.selected, selectedOrgUnit?.id]);
@@ -161,18 +146,6 @@ const Home = (props) => {
 
   return (
     <div>
-      levels:{maxOrgUnitLevels}
-      <br />
-      dataset: {dataSetId}
-      <br />
-      validOrgUnitCount: {validOrgUnitCount}
-      <br />
-      dataElementGroup:{JSON.stringify(selectedDataElementGroup)}
-      ou={JSON.stringify(selectedOrgUnit)}&pe={JSON.stringify(selectedPeriod)}
-      &de=
-      {JSON.stringify(
-        dataElements?.dataElements?.dataElementGroups[0]?.dataElements[0].id
-      )}
       <h3 style={{ marginLeft: "20px" }}>Select OrgUnit</h3>
       <div className={classes.flexbreak}>
         <div className={classes.container} style={{ flex: "1 1 400px" }}>
@@ -201,7 +174,7 @@ const Home = (props) => {
             selected={
               periods.map((el) => el.id).includes(selectedPeriod?.selected)
                 ? selectedPeriod?.selected
-                : null
+                : undefined
             }
             periods={periods}
             onChange={setSelectedPeriod}
