@@ -8,14 +8,14 @@ const DataElementRow = ({
   dataValues
 }) => {
   const expectedValues =
-    validOrgUnitCount *
-    dataElement?.categoryCombo?.categoryOptionCombos *
-    dataElement?.dataSetElements[0]?.dataSet?.categoryCombo
-      ?.categoryOptionCombos;
+    validOrgUnitCount ;
+
+  const countedOrgUnits = []
   const actualValues = dataValues?.reduce((total,data)=>{
-      if(data.dataElement==dataElement?.id)
+      if(data.dataElement==dataElement?.id && !countedOrgUnits.includes(data?.orgUnit)){
+        countedOrgUnits.push(data?.orgUnit);
         return total+1;
-      else
+      }else
         return total;
   },0)
 
